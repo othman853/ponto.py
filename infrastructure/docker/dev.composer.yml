@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  cli:
+    build:
+      dockerfile: infrastructure/docker/images/python.docker
+      context: ../../
+    volumes:
+      - ../../:/usr/app
+    links:
+      - db
+    command: [python,/usr/app/lib/main.py]
+    container_name: ponto_cli
+
+  db:
+    build:
+      dockerfile: infrastructure/docker/images/postgresql.docker
+      context: ../../
+    container_name: ponto_db
